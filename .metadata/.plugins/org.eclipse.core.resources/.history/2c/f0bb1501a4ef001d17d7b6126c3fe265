@@ -1,0 +1,14 @@
+package quiz_w2;
+
+import java.util.Arrays;
+
+public class MainClass {
+    public static void main(String[] args) {
+        // 고객이 10만원을 낸다.
+        Cashier cashier = new Cashier(100000);
+
+        // 시제를 정산하고 영수증을 출력한다.
+        cashier.account();
+        cashier.receipt();
+    }
+}

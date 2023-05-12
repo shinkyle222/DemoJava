@@ -1,0 +1,72 @@
+package day17.api.ramda.stream;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
+import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class MainClass03 {
+
+	public static void main(String[] args) {
+		
+		List<Integer> list = new ArrayList<>();
+		//Random ran = new Random(); 밑에 new Random()으로도 대체 가능
+
+		for (int i = 0; i < 100; i++) {
+			list.add(new Random().nextInt(100) + 1); //1~100까지
+		}
+		System.out.println(list.toString());
+		
+		//최종처리 - 내가 원하는 값으로 만들어 반환
+		//최종집계 함수
+		
+		//Collect()
+		List<Integer> newList = list.stream().filter(a -> a % 3 == 0).collect(Collectors.toList());
+		System.out.println(newList.toString());
+		
+		Set<Integer> newList2 = list.stream().filter(a -> a % 3 == 0).collect(Collectors.toSet());
+		System.out.println(newList2.toString());
+		
+		System.out.println("\n----------------------------------------------");
+		//sum(), count(), avg(), max(), min() - 숫자를 다루는 스트림에서만 사용
+		
+		//sum을 사용
+		int r1 = list.stream().distinct().mapToInt(a -> a).sum();
+		System.out.println("합계:" + r1);
+		
+		long r2 = list.stream().distinct().mapToInt(a -> a).count();
+		System.out.println("갯수:" + r2);
+		
+		OptionalDouble r3 =  list.stream().distinct().mapToInt(a -> a).average();
+		System.out.println(r3.getAsDouble()); //옵셔널 더블링에서 더블값 반환
+		
+		OptionalInt r4 = list.stream().distinct().mapToInt(a -> a).max();
+		System.out.println(r4.getAsInt());
+		
+		System.out.println("\n----------------------------------------------");
+		
+		//list에서 50보다 큰 값만 중복없이 저장하는 새로운 리스트 생성
+
+		List<Integer> result = list.stream().distinct().filter(a -> a >= 50).collect(Collectors.toList());
+		System.out.println(result.toString());
+		
+		System.out.println("\n----------------------------------------------");
+		
+		IntStream.range(1, 10).forEach(a -> System.out.print(a)); //1~10미만까지 정수스트림 반환
+		//range는 반복문을 내는 효과와 동일하다.
+		IntStream.rangeClosed(1, 10).forEach(a -> System.out.println(a)); //포함 정수스트림 반환
+		
+		int result2 = IntStream.rangeClosed(1, 100).sum();
+		System.out.println(result2);
+		
+		//정수스트림 -> 일반스트림 형변환
+		Stream<Integer> stream = IntStream.rangeClosed(1, 100).boxed();
+		
+	}
+}

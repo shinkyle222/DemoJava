@@ -1,0 +1,12 @@
+package quiz21;
+
+public class Data {
+
+	//값만 저장하는 클래스
+	private String region;
+	private String size;
+	private int year;
+	private int month;
+	private String price;
+	
+}

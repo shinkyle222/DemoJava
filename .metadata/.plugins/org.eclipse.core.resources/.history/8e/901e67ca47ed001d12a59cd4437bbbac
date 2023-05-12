@@ -1,0 +1,17 @@
+package day17.api.ramda.basic;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		
+		new Car() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+	}
+	
+}

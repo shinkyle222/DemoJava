@@ -1,0 +1,58 @@
+package quiz22;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexQuiz03_1 {
+
+	public static void main(String[] args) {
+
+		List<Product> list = new ArrayList<>();
+		
+		String path = "C:\\Users\\user\\Desktop\\course\\java\\work\\Quiz\\src\\quiz22\\건담.txt";
+
+		try (BufferedReader br1 = new BufferedReader(new FileReader(path))){
+
+			int cnt;
+			String str;
+			while ((str = br1.readLine()) != null) {
+				
+				String pattern1 = "[0-9]{8}-[0-9]{2}-[0-9]{12,13}";
+				String pattern2 = "[가-힣]+ [가-힣]+";
+				String pattern3 = "\\[[가-힣A-Z]+\\]";
+				String pattern4 = "\\d+,*\\d+원"; //가격 /* 뜻 - 있을 수도 있고 없을 수도 있고
+				
+				Matcher m1 = Pattern.compile(pattern1).matcher(str);
+				Matcher m2 = Pattern.compile(pattern2).matcher(str);
+				Matcher m3 = Pattern.compile(pattern3).matcher(str);
+				Matcher m4 = Pattern.compile(pattern4).matcher(str);
+				
+				if(m1.find() & m2.find() && m3.find() && m4.find()) {
+					
+					System.out.println("===================================");
+					String day = m1.group();
+					String store = m2.group();
+					String grade = m3.group();
+					String price = m4.group();
+					
+					System.out.println(day);
+					System.out.println(store);
+					System.out.println(grade);
+					System.out.println(price);
+					
+					cnt++;
+				}
+			}
+				System.out.println(cnt);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+

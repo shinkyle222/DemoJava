@@ -1,0 +1,7 @@
+package day17.api.ramda.basic;
+
+public class MainClass {
+
+	new Car();
+	
+}

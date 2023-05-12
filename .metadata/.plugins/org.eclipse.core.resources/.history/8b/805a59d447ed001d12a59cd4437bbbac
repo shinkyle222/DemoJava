@@ -1,0 +1,18 @@
+package day17.api.ramda.basic;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		
+		new Car() {
+			
+			@Override
+			public void run() {
+				System.out.println("익명 객체로 생성된 Car");
+				//내가 구현할 메서드를 사용하게끔 위에 형식이 나옴
+				
+			}
+		};
+	}
+	
+}

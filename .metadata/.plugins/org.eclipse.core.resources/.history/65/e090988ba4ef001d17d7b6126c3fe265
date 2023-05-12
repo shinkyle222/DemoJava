@@ -1,0 +1,80 @@
+package quiz_w2;
+
+public class MainClass {
+    private int account; // 계산할 금액
+    private int total; // 과일 영수증에 쓰이는 총 금액
+
+    public MainClass(int account) {
+        this.account = account;
+    }
+
+    // 시제를 정산하는 메서드
+    public void settleAccounts() {
+        System.out.println("총 구매 금액: " + total + "원");
+        int change = account - total;
+        if (change < 0) {
+            System.out.println("돈이 부족합니다.");
+        } else {
+            System.out.println("거스름돈: " + change + "원");
+            calculate(change);
+        }
+    }
+
+    // 과일 영수증을 출력하고 calculate 메서드 실행
+    public void receipt(String[] fruit, int[] price) {
+        shuffleFruits(fruit, price); // 과일 배열을 무작위로 바꾸기
+        System.out.println("------- 영수증 -------");
+        for (int i = 0; i < 5; i++) {
+            System.out.println(fruit[i] + ": " + price[i] + "원");
+            total += price[i]; // 총 금액 계산
+        }
+        System.out.println("----------------------");
+        calculate(account, total);
+    }
+
+    // 거스름돈 계산 메서드
+    private void calculate(int money, int total) {
+        int[] change = new int[coinUnit.length]; // 거스름돈 개수를 저장할 배열
+        int remain = money; // 남은 거스름돈
+
+        for (int i = 0; i < coinUnit.length; i++) {
+            change[i] = Math.min(remain / coinUnit[i], coin[i]); // 거스름돈 개수 계산
+            remain -= change[i] * coinUnit[i];
+        }
+
+        // 거스름돈 출력
+        System.out.println("거스름돈: ");
+        for (int i = 0; i < coinUnit.length; i++) {
+            if (change[i] > 0) {
+                System.out.println(coinUnit[i] + "원권: " + change[i] + "장");
+            }
+        }
+    }
+
+    // 과일 배열을 무작위로 바꾸는 메서드
+    private void shuffleFruits(String[] fruit, int[] price) {
+        for (int i = 0; i < fruit.length; i++) {
+            int randomIndex = (int) (Math.random() * fruit.length);
+            String tempFruit = fruit[i];
+            int tempPrice = price[i];
+            fruit[i] = fruit[randomIndex];
+            price[i] = price[randomIndex];
+            fruit[randomIndex] = tempFruit;
+            price[randomIndex] = tempPrice;
+        }
+    }
+}
+그리고 부가 Class인 Cashier.java를 만들어보겠습니다.
+
+Cashier.java:
+
+java
+Copy code
+public class Cashier {
+    private static final int[] coinUnit = {10000, 5000, 1000, 500, 100, 50, 10};
+    private static final int[] coin     = {2, 4, 0,
+
+
+
+
+

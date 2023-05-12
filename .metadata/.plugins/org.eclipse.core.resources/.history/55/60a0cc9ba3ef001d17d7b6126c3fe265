@@ -1,0 +1,67 @@
+package quiz_w2;
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class Quiz06 {
+    private final int[] coinUnit = {10000, 5000, 1000, 500, 100, 50, 10};
+    private int[] coin;
+
+    public Quiz06(int amount) {
+        coin = new int[coinUnit.length];
+        for (int i = 0; i < coinUnit.length; i++) {
+            coin[i] = amount / coinUnit[i];
+            amount %= coinUnit[i];
+        }
+    }
+
+    public int[] calculateChange(int totalPrice, int paidMoney) {
+        int change = paidMoney - totalPrice;
+        int[] changeCoins = new int[coinUnit.length];
+        for (int i = 0; i < coinUnit.length; i++) {
+            changeCoins[i] = change / coinUnit[i];
+            change %= coinUnit[i];
+        }
+        return changeCoins;
+    }
+
+    public int[] getCoin() {
+        return coin;
+    }
+}
+
+class FruitStore {
+    private final String[] fruit = {"사과", "메론", "바나나", "딸기", "수박", "블루베리", "참외", "포도", "배"};
+    private final int[] price = {4990, 7890, 3990, 14990, 17990, 9990, 1990, 24990, 4590};
+    private Random random = new Random();
+
+    public void sellFruit() {
+        int randomIndex = random.nextInt(fruit.length);
+        String selectedFruit = fruit[randomIndex];
+        int selectedPrice = price[randomIndex];
+        System.out.println(selectedFruit + "의 가격은 " + selectedPrice + "원입니다.");
+        Quiz06 cashier = new Quiz06(100000);
+        int[] coin = cashier.getCoin();
+        System.out.println("10000원권: " + coin[0] + "개");
+        System.out.println("5000원권: " + coin[1] + "개");
+        System.out.println("1000원권: " + coin[2] + "개");
+        System.out.println("500원: " + coin[3] + "개");
+        System.out.println("100원: " + coin[4] + "개");
+        System.out.println("50원: " + coin[5] + "개");
+        System.out.println("10원: " + coin[6] + "개");
+        int paidMoney = selectedPrice + 1000;  // 손님이 지불한 돈 (1000원 추가)
+        int[] changeCoins = cashier.calculateChange(selectedPrice, paidMoney);
+        System.out.println("거스름돈: " + Arrays.toString(changeCoins));
+    }
+}
+
+public class FruitShop {
+    public static void main(String[] args) {
+        FruitStore fruitStore = new FruitStore();
+        for (int i = 0; i < 5; i++) {
+            System.out.println((i + 1) + "번째 구매");
+            fruitStore.sellFruit();
+            System.out.println();
+        }
+    }
+}

@@ -1,0 +1,14 @@
+package day18.api.thread.ex02;
+
+public class ThreadTest implements Runnable {
+
+	private int num = 0; //멤버변수 선언
+	
+	@Override
+	public void run() {
+		
+		for(int i = 1; i <= 10; i++) {
+			
+		}
+	}
+}

@@ -1,0 +1,47 @@
+package quiz_w2;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Quiz04 {
+
+	public static void main(String[] args) {
+	
+	/*
+	 *1. 복권을 구매하러 왔습니다. 구매한 복권의 번호를 출력합니다.
+    	(복권 숫자는 랜덤입니다. 범위는 1~45 까지 입니다!)
+    	(Random 클래스는 API 주제여서 사용하진 않았으나, 사용하셔도 됩니다.)
+
+	  2. 이번 주 당첨 번호를 출력하고
+
+	  3. 내가 산 복권번호와 이번주 복권 번호를 비교해서
+   		 꽝인지, 당첨이 됐는지 출력해봅시다.
+   	 	 (당첨 유무 출력은 자유롭게 해주셔도 됩니다!)
+
+	  4. 단, 복권을 구매할 때 수동으로 번호 3개를 지정합니다.
+    	 (수동으로 3개, 자동으로 3개 출력되면 됩니다.)
+
+    	 ex. lotto(3,7,10);	
+         출력시 -> [3,7,10,39,36,43] 
+	 */
+		
+		Scanner scan = new Scanner(System.in);
+		System.out.println("숫자 3개를 입력하세요.");
+		
+		int[] mynum = new int[3];
+				
+		for (int i = 0; i < mynum.length; i++){
+			mynum[i] = scan.nextInt();
+			if (mynum[i] > 45 || mynum[i] < 0) {
+				System.out.println("1 ~ 45 사이 숫자만 입력하세요.");
+			}
+		}
+		Arrays.sort(mynum);
+		System.out.println("로또 추첨결과:" + set.toString());
+		
+		//https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=munjh4200&logNo=50175539173
+	}
+}

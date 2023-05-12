@@ -1,0 +1,66 @@
+import java.util.*;
+
+public class Quiz04_1 {
+    private static final int LOTTO_SIZE = 6;
+    private static final int MAX_NUMBER = 45;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int[] manualNumbers = new int[LOTTO_SIZE];
+        int[] autoNumbers = new int[LOTTO_SIZE - manualNumbers.length];
+
+        System.out.println("1부터 45까지의 숫자 중 수동으로 선택할 " + manualNumbers.length + "개의 번호를 입력하세요.");
+
+        for (int i = 0; i < manualNumbers.length; i++) {
+            System.out.print((i+1) + "번째 수동 선택 번호: ");
+            int number = scanner.nextInt();
+
+            while (contains(manualNumbers, number) || number < 1 || number > MAX_NUMBER) {
+                System.out.println("잘못된 입력입니다. 다시 입력하세요.");
+                System.out.print((i+1) + "번째 수동 선택 번호: ");
+                number = scanner.nextInt();
+            }
+
+            manualNumbers[i] = number;
+        }
+
+        autoNumbers = generateAutoNumbers(autoNumbers.length, MAX_NUMBER, manualNumbers);
+
+        Arrays.sort(manualNumbers);
+        Arrays.sort(autoNumbers);
+
+        System.out.print("\n선택한 수동 번호: ");
+        for (int number : manualNumbers) {
+            System.out.print(number + " ");
+        }
+
+        System.out.print("\n자동 생성 번호: ");
+        for (int number : autoNumbers) {
+            System.out.print(number + " ");
+        }
+    }
+
+    private static int[] generateAutoNumbers(int size, int max, int[] excludedNumbers) {
+        int[] numbers = new int[size];
+        Random random = new Random();
+
+        for (int i = 0; i < size; i++) {
+            int number;
+            do {
+                number = random.nextInt(max) + 1;
+            } while (contains(excludedNumbers, number) || contains(numbers, number));
+            numbers[i] = number;
+        }
+        return numbers;
+    }
+
+    private static boolean contains(int[] numbers, int number) {
+        for (int i : numbers) {
+            if (i == number) {
+                return true;
+            }
+        }
+        return false;
+    }
+}

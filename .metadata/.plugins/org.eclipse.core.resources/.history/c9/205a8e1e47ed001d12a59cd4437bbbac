@@ -1,0 +1,6 @@
+package day17.api.ramda.basic;
+
+public interface Car {
+
+
+}

@@ -1,0 +1,14 @@
+package day17.api.regex;
+
+public class RegexEx01 {
+
+	public static void main(String[] args) {
+		
+		String info ="홍길동|30세|서울시 강남구|010-1234-5678";
+		
+		//전화번호 형식을 찾아서 ***-****-****해주세요.
+		//regex가 매개변수에 적혀있으면 정규표현식 가능 다른 것들은 X
+		//regex가 맞는 표현 찾아서 바꿔준다.
+		info.replace(0, 0)
+	}
+}

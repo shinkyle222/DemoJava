@@ -1,0 +1,50 @@
+package quiz_w2;
+
+import java.util.Scanner;
+
+public class Quiz05 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("년도를 입력하세요(yyyy): ");
+        int year = scanner.nextInt();
+        System.out.print("월을 입력하세요(mm): ");
+        int month = scanner.nextInt();
+        System.out.print("일을 입력하세요(dd): ");
+        int day = scanner.nextInt();
+        String weekday = getWeekday(year, month, day);
+        System.out.println("해당 날짜의 요일은 " + weekday + "입니다.");
+    }
+
+    private static String getWeekday(int year, int month, int day) {
+        String[] weekdays = {"일", "월", "화", "수", "목", "금", "토"};
+        int[] daysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int daysSinceJan1st2023 = 0;
+
+        // 2023년 1월 1일부터 해당 날짜까지의 날짜 수 계산
+        for (int i = 2023; i < year; i++) {
+            if (isLeapYear(i)) {
+                daysSinceJan1st2023 += 366;
+            } else {
+                daysSinceJan1st2023 += 365;
+            }
+        }
+
+        for (int i = 1; i < month; i++) {
+            if (i == 2 && isLeapYear(year)) {
+                daysSinceJan1st2023 += 29;
+            } else {
+                daysSinceJan1st2023 += daysInMonth[i-1];
+            }
+        }
+
+        daysSinceJan1st2023 += day - 1;
+
+        // 요일 계산
+        int weekdayIndex = (daysSinceJan1st2023 + 2) % 7;
+        return weekdays[weekdayIndex];
+    }
+
+    private static boolean isLeapYear(int year) {
+        return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
+    }
+}
